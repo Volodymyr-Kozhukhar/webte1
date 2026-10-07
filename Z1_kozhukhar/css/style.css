@@ -1,0 +1,559 @@
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/nunito-latin.woff2") format("woff2");
+    font-weight: 400 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/nunito-latin-ext.woff2") format("woff2");
+    font-weight: 400 700;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+    --color-brand: #011638;
+    --color-brand-secondary: #0d21a1;
+    --color-accent: #eec643;
+    --color-accent-soft: #fff3c4;
+    --color-text: #141414;
+    --color-background: #eff0f2;
+    --color-surface: #ffffff;
+    --color-shadow: rgb(0 0 0 / 0.18);
+    --radius: 0.25rem;
+    --space: 1rem;
+    --content-width: 60rem;
+    --dot-size: 1rem;
+    --panel-width: 16rem;
+    --panel-area: 9rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+main {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--space);
+}
+
+.site-header,
+.site-nav,
+.site-footer {
+    padding-inline: max(var(--space), calc((100% - var(--content-width)) / 2 + var(--space)));
+}
+
+.schedule-page {
+    --content-width: 90rem;
+}
+
+.site-header,
+main,
+.site-footer {
+    padding-block: calc(2 * var(--space));
+}
+
+main > section,
+main > aside {
+    margin-top: calc(2 * var(--space));
+}
+
+main > section {
+    padding: calc(1.5 * var(--space));
+    background-color: var(--color-surface);
+    border-radius: var(--radius);
+}
+
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space);
+    color: var(--color-surface);
+    background-color: var(--color-brand);
+    border-bottom: 3px solid var(--color-accent);
+}
+
+.site-logo {
+    padding: 0.25rem 0.5rem;
+    color: var(--color-brand);
+    background-color: var(--color-accent-soft);
+    border-radius: var(--radius);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-name {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.site-tagline {
+    flex-basis: 100%;
+    margin: 0;
+}
+
+.site-nav {
+    padding-block: calc(var(--space) / 2);
+    background-color: var(--color-surface);
+}
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    color: var(--color-brand);
+    border-radius: var(--radius);
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    background-color: var(--color-accent-soft);
+    text-decoration: underline;
+}
+
+.nav-link[aria-current="page"] {
+    color: var(--color-brand-secondary);
+    background-color: var(--color-accent-soft);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+h1,
+h2 {
+    margin: 0 0 var(--space);
+    color: var(--color-brand);
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+p {
+    margin: 0 0 var(--space);
+}
+
+a {
+    color: var(--color-brand);
+}
+
+.profile-motto {
+    border-inline-start: 0.25rem solid var(--color-accent);
+    padding: var(--space);
+    background-color: var(--color-accent-soft);
+}
+
+.profile-motto p {
+    font-style: italic;
+}
+
+.site-footer {
+    color: var(--color-surface);
+    background-color: var(--color-brand);
+    border-top: 3px solid var(--color-accent);
+}
+
+.site-footer a {
+    color: var(--color-accent-soft);
+}
+
+.contact,
+.cv-contact address {
+    font-style: normal;
+}
+
+.cv-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.cv-contact,
+.cv-content {
+    padding: var(--space);
+}
+
+.cv-contact {
+    color: var(--color-background);
+    background-color: var(--color-brand);
+}
+
+.cv-contact h2,
+.cv-contact a {
+    color: inherit;
+}
+
+.cv-content {
+    background-color: var(--color-surface);
+}
+
+.cv-content > section + section {
+    margin-top: calc(2 * var(--space));
+}
+
+@media (min-width: 48rem) {
+    .cv-layout {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .map-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.schedule-table {
+    width: 100%;
+    min-width: 48rem;
+    /* border-collapse: collapse; */
+    background-color: var(--color-surface);
+}
+
+.schedule-table caption {
+    margin-bottom: var(--space);
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid var(--color-brand);
+    padding: calc(var(--space) / 2);
+    text-align: center;
+    vertical-align: top;
+}
+
+.schedule-table thead {
+    color: var(--color-background);
+    background-color: var(--color-brand);
+}
+
+.schedule-table tbody tr:nth-of-type(even) {
+    background-color: var(--color-background);
+}
+
+.schedule-table .lecture {
+    background-color: var(--color-accent);
+}
+
+.schedule-table .exercise {
+    color: var(--color-background);
+    background-color: var(--color-brand-secondary);
+}
+
+.schedule-table .sport {
+    color: var(--color-background);
+    background-color: var(--color-text);
+}
+
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: var(--space);
+    z-index: 1;
+    transform: translateY(-100%);
+    padding: calc(var(--space) / 2);
+    color: var(--color-background);
+    background-color: var(--color-brand);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+button:focus-visible,
+.menu-toggle:focus-visible + .menu-label {
+    outline: 2px solid var(--color-brand-secondary);
+    outline-offset: 0.25rem;
+}
+
+.menu-toggle,
+.menu-label {
+    display: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.profile {
+    display: flow-root;
+}
+
+.profile-image {
+    float: left;
+    width: 12rem;
+    margin: 0 var(--space) var(--space) 0;
+}
+
+.cv-image {
+    display: block;
+    width: 12rem;
+    margin-bottom: var(--space);
+}
+
+.cockpit {
+    position: relative;
+}
+
+.cockpit img {
+    display: block;
+    width: 100%;
+}
+
+.hotspot {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--dot-size);
+    height: var(--dot-size);
+    transform: translate(-50%, -50%);
+}
+
+.hotspot-stick {
+    --x: 47%;
+    --y: 86%;
+}
+
+.hotspot-throttle {
+    --x: 10%;
+    --y: 92%;
+}
+
+.hotspot-hud {
+    --x: 46%;
+    --y: 15%;
+}
+
+.hotspot-gear {
+    --x: 20%;
+    --y: 78%;
+}
+
+.hotspot-fuel {
+    --x: 61%;
+    --y: 72%;
+}
+
+.hotspot-dot {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    background-color: var(--color-accent);
+    border: 2px solid var(--color-surface);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--color-accent);
+    cursor: pointer;
+}
+
+.hotspot-dot:hover,
+.hotspot-dot:focus-visible {
+    background-color: var(--color-brand-secondary);
+}
+
+.hotspot-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: var(--panel-width);
+    padding: var(--space);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border-left: 4px solid var(--color-brand);
+    border-radius: var(--radius);
+    box-shadow: 0 0.5rem 1.5rem var(--color-shadow);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.hotspot-panel h3 {
+    margin: 0 0 calc(var(--space) / 2);
+    font-size: 1rem;
+}
+
+.hotspot-panel p {
+    margin: 0;
+}
+
+.hotspot:hover .hotspot-panel,
+.hotspot:focus-within .hotspot-panel {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hotspot:hover,
+.hotspot:focus-within {
+    z-index: 2;
+}
+
+.hotspot-above .hotspot-panel {
+    top: auto;
+    bottom: 100%;
+}
+
+.hotspot-left .hotspot-panel {
+    left: auto;
+    right: 0;
+}
+
+#map {
+    height: 24rem;
+    border: 1px solid var(--color-brand);
+    background-color: var(--color-surface);
+}
+
+.map-controls {
+    display: grid;
+    gap: var(--space);
+    margin-bottom: var(--space);
+}
+
+.map-controls label {
+    display: block;
+}
+
+.map-controls input,
+.map-controls select,
+.button {
+    font: inherit;
+    padding: calc(var(--space) / 2);
+    border: 1px solid var(--color-brand);
+    border-radius: var(--radius);
+}
+
+.map-controls input,
+.map-controls select {
+    width: 100%;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+}
+
+.button {
+    align-self: end;
+    color: var(--color-background);
+    background-color: var(--color-brand);
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+@media (max-width: 48rem) {
+    .cockpit {
+        margin-bottom: calc(var(--panel-area) + var(--space));
+    }
+
+    .hotspot {
+        position: static;
+        width: auto;
+        height: 0;
+        transform: none;
+    }
+
+    .hotspot-dot {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--dot-size);
+        height: var(--dot-size);
+        transform: translate(-50%, -50%);
+    }
+
+    .cockpit .hotspot-panel {
+        left: 0;
+        right: 0;
+        top: calc(100% + var(--space));
+        bottom: auto;
+        width: auto;
+        height: var(--panel-area);
+        overflow-y: auto;
+        box-shadow: none;
+        pointer-events: auto;
+        transition: none;
+    }
+
+    .cockpit:has(.hotspot:hover) .hotspot:not(:hover) .hotspot-panel {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .cockpit:not(:has(.hotspot:hover, .hotspot:focus-within)) > .hotspot:first-of-type .hotspot-panel {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .profile-image {
+        float: none;
+        display: block;
+        margin: 0 0 var(--space);
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+    }
+
+    .menu-label {
+        display: inline-block;
+        color: var(--color-brand);
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .nav-list {
+        display: none;
+    }
+
+    .menu-toggle:checked ~ .nav-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: var(--space);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hotspot-panel {
+        transition: none;
+    }
+}

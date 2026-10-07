@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <a href="#main-content">Preskočiť na obsah</a>
+    <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
 
     <header class="site-header">
         <a class="site-logo" href="index.html" aria-label="Volodymyr Kozhukhar – úvodná stránka">VK</a>
@@ -19,6 +19,8 @@
     </header>
 
     <nav class="site-nav" aria-label="Hlavná navigácia">
+        <input class="menu-toggle" type="checkbox" id="menu-toggle">
+        <label class="menu-label" for="menu-toggle">☰ Menu</label>
         <ul class="nav-list">
             <li><a class="nav-link" href="index.html" aria-current="page">Profil</a></li>
             <li><a class="nav-link" href="pages/cv.html">Životopis</a></li>
@@ -33,6 +35,7 @@
 
         <section class="profile" aria-labelledby="about-heading">
             <h2 id="about-heading">O mne</h2>
+            <img class="profile-image" src="img/avatar.svg" alt="Avatar s mojimi iniciálami VK" width="240" height="240" loading="lazy">
             <p>
                 Študujem aplikovanú informatiku na Slovenskej technickej univerzite
                 v Bratislave. Zaujímam sa o programovanie a webové technológie.
@@ -44,11 +47,11 @@
         </section>
 
         <section class="interests" aria-labelledby="interests-heading">
-            <h2 id="interests-heading">Moje tri hlavné záujmy</h2>
+            <h2 id="interests-heading">Moje záujmy</h2>
             <ul>
                 <li>Programovanie</li>
-                <li>Šport</li>
-                <li>Hudba</li>
+                <li>Cvičenie v posilňovni</li>
+                <li>Lietanie v leteckých simulátoroch</li>
             </ul>
         </section>
 
@@ -61,6 +64,7 @@
     <footer class="site-footer">
         <address class="contact">
             <p>Kontakt: Volodymyr Kozhukhar</p>
+            <p>Email: <a href="mailto:volodymyr@example.com">volodymyr@example.com</a></p>
             <p>Telefón: <a href="tel:+421880055535">+421 88 005 5535</a></p>
         </address>
         <p><small>© 2026 Volodymyr Kozhukhar</small></p>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kde študujem a ako ma nájdete. Moja škola je STU v Bratislave.">
+    <meta property="og:title" content="Kde ma nájdete | Volodymyr Kozhukhar">
+    <meta property="og:description" content="Moja škola a miesta na mape.">
+    <title>Kde ma nájdete | Volodymyr Kozhukhar</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
+
+    <header class="site-header">
+        <a class="site-logo" href="../index.html">VK</a>
+        <p class="site-name">Volodymyr Kozhukhar</p>
+        <p class="site-tagline">Študujem aplikovanú informatiku a zaujímam sa o webové technológie.</p>
+    </header>
+
+    <nav class="site-nav">
+        <input class="menu-toggle" type="checkbox" id="menu-toggle">
+        <label class="menu-label" for="menu-toggle">☰ Menu</label>
+        <ul class="nav-list">
+            <li><a class="nav-link" href="../index.html">Profil</a></li>
+            <li><a class="nav-link" href="cv.html">Životopis</a></li>
+            <li><a class="nav-link" href="workspace.html">Pracovné prostredie</a></li>
+            <li><a class="nav-link" href="schedule.html">Kedy ma zastihnete</a></li>
+            <li><a class="nav-link" href="map.html" aria-current="page">Kde ma nájdete</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <h1>Kde ma nájdete</h1>
+        <section>
+            <h2>Moja škola</h2>
+            <p>Študujem na Slovenskej technickej univerzite v Bratislave.</p>
+        </section>
+        <section>
+            <h2>Mapa</h2>
+            <p>Interaktívna mapa zatiaľ nie je dostupná.</p>
+            <div id="map"></div>
+        </section>
+        <section>
+            <h2>Moje body</h2>
+            <p>Po sprístupnení mapy zadajte názov a kliknite na mapu. Potom vyberte bod a cieľ na zobrazenie vzdialenosti.</p>
+            <div class="map-controls">
+                <div>
+                    <label for="point-name">Názov nového bodu</label>
+                    <input id="point-name" type="text" maxlength="80" disabled>
+                </div>
+                <div>
+                    <label for="point-select">Vybraný bod</label>
+                    <select id="point-select" disabled>
+                        <option value="">Najprv pridajte bod</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="target-select">Cieľ</label>
+                    <select id="target-select" disabled>
+                        <option value="school">Škola</option>
+                        <option value="home">Domov</option>
+                    </select>
+                </div>
+                <button class="button" id="distance-button" type="button" disabled>Zobraziť vzdialenosť</button>
+            </div>
+            <p id="points-message">Zatiaľ nie sú pridané žiadne body.</p>
+            <ul id="points-list"></ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <address class="contact">
+            <p>Kontakt: Volodymyr Kozhukhar</p>
+            <p>Email: <a href="mailto:volodymyr@example.com">volodymyr@example.com</a></p>
+            <p>Telefón: <a href="tel:+421880055535">+421 88 005 5535</a></p>
+        </address>
+        <p><small>© 2026 Volodymyr Kozhukhar</small></p>
+        <p><a href="https://webte.iolab.sk/">Webové technológie I.</a></p>
+    </footer>
+</body>
+</html>

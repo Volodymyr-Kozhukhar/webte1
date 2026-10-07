@@ -1,0 +1,59 @@
+@media print {
+    @page {
+        size: A4;
+        margin: 12mm;
+    }
+
+    .site-header,
+    .site-nav,
+    .site-footer,
+    .skip-link {
+        display: none;
+    }
+
+    body {
+        font-size: 10pt;
+        line-height: 1.3;
+        background: none;
+    }
+
+    main {
+        max-width: none;
+        padding: 0;
+    }
+
+    .cv-layout {
+        grid-template-columns: 1fr 2fr;
+        gap: 6mm;
+    }
+
+    .cv-contact,
+    .cv-content {
+        padding: 0;
+        color: var(--color-text);
+        background: none;
+    }
+
+    h1 {
+        font-size: 18pt;
+    }
+
+    h2 {
+        font-size: 12pt;
+    }
+
+    h1,
+    h2,
+    a {
+        color: var(--color-text);
+    }
+
+    p,
+    ul {
+        margin: 0 0 3mm;
+    }
+
+    .cv-content > section + section {
+        margin-top: 4mm;
+    }
+}
