@@ -134,7 +134,8 @@ main > section {
     text-decoration: underline;
 }
 
-.nav-link[aria-current="page"] {
+.nav-link[aria-current="page"],
+.nav-link[aria-pressed="true"] {
     color: var(--color-brand-secondary);
     background-color: var(--color-accent-soft);
     font-weight: 700;
@@ -227,6 +228,24 @@ a {
     }
 }
 
+.schedule-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space);
+    margin-bottom: var(--space);
+}
+
+.schedule-filter {
+    border: 0;
+    font: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.schedule-table .filtered-out {
+    visibility: hidden;
+}
+
 .table-container {
     overflow-x: auto;
 }
@@ -271,6 +290,21 @@ a {
 .schedule-table .sport {
     color: var(--color-background);
     background-color: var(--color-text);
+}
+
+.schedule-table .current-lesson {
+    color: var(--color-brand);
+    background-color: var(--color-accent-soft);
+    outline: 4px solid var(--color-brand);
+    outline-offset: -4px;
+    font-weight: 700;
+}
+
+#semester-progress {
+    display: block;
+    width: 100%;
+    height: var(--space);
+    accent-color: var(--color-brand-secondary);
 }
 
 .skip-link {

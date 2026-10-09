@@ -8,6 +8,7 @@
     <meta property="og:description" content="Môj rozvrh a dostupnosť počas semestra.">
     <title>Kedy ma zastihnete | Volodymyr Kozhukhar</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
 </head>
 <body class="schedule-page">
     <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
@@ -35,6 +36,13 @@
         <section>
             <h2>Môj týždenný rozvrh</h2>
             <p>Tu nájdete moje prednášky, cvičenia a telesnú kultúru počas týždňa.</p>
+            <p id="schedule-message" aria-live="polite"></p>
+            <div class="schedule-filters">
+                <button class="nav-link schedule-filter" type="button" data-filter="all" aria-pressed="true">Všetko</button>
+                <button class="nav-link schedule-filter" type="button" data-filter="lecture" aria-pressed="false">Prednášky</button>
+                <button class="nav-link schedule-filter" type="button" data-filter="exercise" aria-pressed="false">Cvičenia</button>
+            </div>
+            <p id="filter-message" aria-live="polite" hidden></p>
             <div class="table-container">
                 <table class="schedule-table">
                     <caption>Môj týždenný rozvrh od 7:00 do 21:00</caption>
@@ -58,92 +66,92 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr data-day="1">
                             <th scope="row">Pondelok</th>
                             <td colspan="2"></td>
-                            <td class="exercise" colspan="2">
+                            <td class="exercise" colspan="2" data-start="540" data-end="650">
                                 Operačné systémy<br>
                                 9:00–10:50, cpu-e<br>
                                 <small>Cvičenie · M. Jókay</small>
                             </td>
                             <td colspan="2"></td>
-                            <td class="exercise" colspan="2">
+                            <td class="exercise" colspan="2" data-start="780" data-end="890">
                                 Webové technológie 1<br>
                                 13:00–14:50, c137<br>
                                 <small>Cvičenie · K. Žáková</small>
                             </td>
                             <td colspan="6"></td>
                         </tr>
-                        <tr>
+                        <tr data-day="2">
                             <th scope="row" rowspan="2">Utorok</th>
                             <td></td>
-                            <td class="lecture" colspan="2">
+                            <td class="lecture" colspan="2" data-start="480" data-end="590">
                                 Analýza a zložitosť algoritmov<br>
                                 8:00–9:50, de300<br>
                                 <small>Prednáška · M. Bečka</small>
                             </td>
-                            <td class="lecture" colspan="2">
+                            <td class="lecture" colspan="2" data-start="600" data-end="710">
                                 Webové technológie 1<br>
                                 10:00–11:50, cd150<br>
                                 <small>Prednáška · K. Žáková</small>
                             </td>
                             <td colspan="3"></td>
-                            <td class="lecture" colspan="2">
+                            <td class="lecture" colspan="2" data-start="900" data-end="1010">
                                 Softvérové inžinierstvo<br>
                                 15:00–16:50, cd300<br>
                                 <small>Prednáška · O. Gallo</small>
                             </td>
-                            <td class="exercise">
+                            <td class="exercise" data-start="1020" data-end="1070">
                                 Softvérové inžinierstvo<br>
                                 17:00–17:50, cd300<br>
                                 <small>Cvičenie · O. Gallo</small>
                             </td>
                             <td colspan="3"></td>
                         </tr>
-                        <tr>
+                        <tr data-day="2">
                             <td colspan="4"></td>
-                            <td class="sport" colspan="2">
+                            <td class="sport" colspan="2" data-start="660" data-end="770">
                                 Telesná kultúra 5<br>
                                 11:00–12:50, t-upol<br>
                                 <small>L. Jurkovič</small>
                             </td>
                             <td colspan="8"></td>
                         </tr>
-                        <tr>
+                        <tr data-day="3">
                             <th scope="row">Streda</th>
                             <td></td>
-                            <td class="lecture" colspan="2">
+                            <td class="lecture" colspan="2" data-start="480" data-end="590">
                                 Operačné systémy<br>
                                 8:00–9:50, cd300<br>
                                 <small>Prednáška · M. Jókay</small>
                             </td>
-                            <td class="lecture" colspan="2">
+                            <td class="lecture" colspan="2" data-start="600" data-end="710">
                                 Analýza a zložitosť algoritmov<br>
                                 10:00–11:50, bc150<br>
                                 <small>Prednáška · M. Bečka</small>
                             </td>
                             <td></td>
-                            <td class="lecture" colspan="2">
+                            <td class="lecture" colspan="2" data-start="780" data-end="890">
                                 Webové technológie 1<br>
                                 13:00–14:50, cd150<br>
                                 <small>Prednáška · K. Žáková</small>
                             </td>
                             <td colspan="6"></td>
                         </tr>
-                        <tr>
+                        <tr data-day="4">
                             <th scope="row">Štvrtok</th>
                             <td colspan="4"></td>
-                            <td class="exercise">
+                            <td class="exercise" data-start="660" data-end="710">
                                 Softvérové inžinierstvo<br>
                                 11:00–11:50, c137<br>
                                 <small>Cvičenie · O. Gallo</small>
                             </td>
                             <td colspan="9"></td>
                         </tr>
-                        <tr>
+                        <tr data-day="5">
                             <th scope="row">Piatok</th>
                             <td colspan="2"></td>
-                            <td class="exercise">
+                            <td class="exercise" data-start="540" data-end="590">
                                 Analýza a zložitosť algoritmov<br>
                                 9:00–9:50, cd150<br>
                                 <small>Cvičenie · M. Bečka</small>
@@ -154,6 +162,9 @@
                 </table>
             </div>
             <p>V utorok sa prednáška Webové technológie 1 a Telesná kultúra 5 časovo prekrývajú, preto ich uvádzam v dvoch riadkoch.</p>
+            <label for="semester-progress">Uplynutá časť semestra (14. 9. – 14. 12. 2026)</label>
+            <progress id="semester-progress" max="100" value="0"></progress>
+            <p id="semester-message"></p>
         </section>
     </main>
 
