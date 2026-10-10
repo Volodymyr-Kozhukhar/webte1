@@ -6,8 +6,13 @@
     <meta name="description" content="Kde študujem a ako ma nájdete. Moja škola je STU v Bratislave.">
     <meta property="og:title" content="Kde ma nájdete | Volodymyr Kozhukhar">
     <meta property="og:description" content="Moja škola a miesta na mape.">
+    <meta property="og:image" content="https://webte1.fei.stuba.sk/~xkozhukhar/Z1_kozhukhar/img/avatar.png">
     <title>Kde ma nájdete | Volodymyr Kozhukhar</title>
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous" defer></script>
+    <script src="../js/map.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
@@ -34,16 +39,16 @@
         <h1>Kde ma nájdete</h1>
         <section>
             <h2>Moja škola</h2>
-            <p>Študujem na Slovenskej technickej univerzite v Bratislave.</p>
+            <p>Študujem na Fakulte elektrotechniky a informatiky STU v Bratislave, Ilkovičova 3.</p>
         </section>
         <section>
             <h2>Mapa</h2>
-            <p>Interaktívna mapa zatiaľ nie je dostupná.</p>
+            <p id="map-message" aria-live="polite">Na načítanie mapy potrebujem zapnutý JavaScript a pripojenie na internet.</p>
             <div id="map"></div>
         </section>
         <section>
             <h2>Moje body</h2>
-            <p>Po sprístupnení mapy zadajte názov a kliknite na mapu. Potom vyberte bod a cieľ na zobrazenie vzdialenosti.</p>
+            <p>Najprv zadám názov bodu a potom kliknem na jeho miesto na mape. Pridané body môžem vyberať zo zoznamu a zostanú uložené v tomto prehliadači aj po obnovení stránky.</p>
             <div class="map-controls">
                 <div>
                     <label for="point-name">Názov nového bodu</label>
@@ -64,7 +69,8 @@
                 </div>
                 <button class="button" id="distance-button" type="button" disabled>Zobraziť vzdialenosť</button>
             </div>
-            <p id="points-message">Zatiaľ nie sú pridané žiadne body.</p>
+            <p id="distance-message" aria-live="polite">Vyberiem pridaný bod a cieľ, potom zobrazím vzdialenosť vzdušnou čiarou.</p>
+            <p id="points-message" aria-live="polite">Zatiaľ nemám pridané žiadne body. Zadám názov a kliknem na mapu.</p>
             <ul id="points-list"></ul>
         </section>
     </main>
@@ -77,6 +83,7 @@
         </address>
         <p><small>© 2026 Volodymyr Kozhukhar</small></p>
         <p><a href="https://webte.iolab.sk/">Webové technológie I.</a></p>
+        <p>Mapa: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://leafletjs.com/">Leaflet</a></p>
     </footer>
 </body>
 </html>
