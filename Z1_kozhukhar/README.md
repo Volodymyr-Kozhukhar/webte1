@@ -1,6 +1,7 @@
 Volodymyr Kozhukhar. Aplikovaná informatika, 3. ročník, cvičenie v pondelok o 13:00.
 
 Web: https://webte1.fei.stuba.sk/~xkozhukhar/Z1_kozhukhar/index.html
+Github: https://github.com/Volodymyr-Kozhukhar/webte1
 
 Na webe predstavujem svoje štúdium, zručnosti a záujmy. Obsahuje životopis s tlačovou verziou, interaktívny kokpit, rozvrh s filtrami a mapu s vlastnými bodmi a výpočtom vzdialenosti.
 
