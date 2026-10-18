@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Obedové menu reštaurácií a jedální v okolí FEI STU v Bratislave.">
+    <title>Obedové menu v okolí fakulty | Zadanie 2</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="vendor/jquery.min.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <p class="site-name">Obedové menu v okolí fakulty</p>
+        </div>
+    </header>
+    <nav class="site-nav">
+        <div class="container">
+            <ul class="nav nav-pills gap-2">
+                <li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/about.html">O projekte</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Čo je dnes na obed?</h1>
+        <p>Porovnajte obedové menu v okolí FEI STU.</p>
+
+        <section class="menu-controls">
+            <h2>Výber menu</h2>
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label" for="source-mode">Zdroj menu</label>
+                    <select class="form-select" id="source-mode" disabled>
+                        <option value="local">Lokálne kópie</option>
+                        <option value="live">Stránky reštaurácií</option>
+                    </select>
+                </div>
+                <div class="col-md-8 d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary" id="refresh-menu" type="button" disabled>Aktualizovať menu</button>
+                    <button class="btn btn-outline-secondary" id="clear-data" type="button" disabled>Vymazať uložené dáta</button>
+                </div>
+            </div>
+
+            <fieldset class="mt-4" disabled>
+                <legend>Deň</legend>
+                <div class="d-flex flex-wrap gap-2" id="day-filters">
+                    <button class="btn btn-outline-primary active" type="button" data-day="1" aria-pressed="true">Pondelok</button>
+                    <button class="btn btn-outline-primary" type="button" data-day="2" aria-pressed="false">Utorok</button>
+                    <button class="btn btn-outline-primary" type="button" data-day="3" aria-pressed="false">Streda</button>
+                    <button class="btn btn-outline-primary" type="button" data-day="4" aria-pressed="false">Štvrtok</button>
+                    <button class="btn btn-outline-primary" type="button" data-day="5" aria-pressed="false">Piatok</button>
+                    <button class="btn btn-outline-primary" type="button" data-day="week" aria-pressed="false">Celý týždeň</button>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt-4" id="restaurant-filters" disabled>
+                <legend>Reštaurácie</legend>
+                <p class="mb-0">Žiadne dostupné reštaurácie.</p>
+            </fieldset>
+        </section>
+
+        <section>
+            <h2>Obedové menu</h2>
+            <p id="menu-message" role="status">Menu momentálne nie je k dispozícii.</p>
+            <div class="row g-3" id="menu-results"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Volodymyr Kozhukhar · WEBTE1 · Zadanie 2</p>
+            <a href="pages/about.html">Zdroje a použité knižnice</a>
+        </div>
+    </footer>
+</body>
+</html>

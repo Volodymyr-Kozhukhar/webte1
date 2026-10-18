@@ -1,0 +1,144 @@
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/nunito-latin.woff2") format("woff2");
+    font-weight: 400 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/nunito-latin-ext.woff2") format("woff2");
+    font-weight: 400 700;
+    font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+    --color-brand: #011638;
+    --color-brand-secondary: #0d21a1;
+    --color-accent: #eec643;
+    --color-accent-soft: #fff3c4;
+    --color-background: #eff0f2;
+    --color-surface: #ffffff;
+    --color-text: #141414;
+    --radius: 0.25rem;
+    --space: 1rem;
+    --bs-body-font-family: "Nunito", sans-serif;
+    --bs-body-color: var(--color-text);
+    --bs-body-bg: var(--color-background);
+    --bs-body-line-height: 1.6;
+    --bs-border-radius: var(--radius);
+    --bs-link-color: var(--color-brand);
+    --bs-link-hover-color: var(--color-brand-secondary);
+}
+
+.container {
+    max-width: 60rem;
+}
+
+.site-header,
+.site-footer {
+    padding-block: calc(2 * var(--space));
+    color: var(--color-surface);
+    background-color: var(--color-brand);
+}
+
+.site-header {
+    border-bottom: 3px solid var(--color-accent);
+}
+
+.site-name {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.site-nav {
+    padding-block: calc(var(--space) / 2);
+    background-color: var(--color-surface);
+}
+
+.site-nav .nav {
+    --bs-nav-link-color: var(--color-brand);
+    --bs-nav-link-hover-color: var(--color-brand);
+    --bs-nav-pills-link-active-color: var(--color-brand-secondary);
+    --bs-nav-pills-link-active-bg: var(--color-accent-soft);
+    --bs-nav-pills-border-radius: var(--radius);
+}
+
+.site-nav .nav-link:hover {
+    background-color: var(--color-accent-soft);
+    text-decoration: underline;
+}
+
+.site-nav .nav-link.active {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--color-brand);
+    --bs-btn-border-color: var(--color-brand);
+    --bs-btn-hover-bg: var(--color-brand-secondary);
+    --bs-btn-hover-border-color: var(--color-brand-secondary);
+    --bs-btn-active-bg: var(--color-brand-secondary);
+    --bs-btn-active-border-color: var(--color-brand-secondary);
+    --bs-btn-disabled-bg: var(--color-brand);
+    --bs-btn-disabled-border-color: var(--color-brand);
+}
+
+.btn-outline-primary,
+.btn-outline-secondary {
+    --bs-btn-color: var(--color-brand);
+    --bs-btn-border-color: var(--color-brand);
+    --bs-btn-hover-color: var(--color-brand);
+    --bs-btn-hover-bg: var(--color-accent-soft);
+    --bs-btn-hover-border-color: var(--color-brand);
+    --bs-btn-active-color: var(--color-brand-secondary);
+    --bs-btn-active-bg: var(--color-accent-soft);
+    --bs-btn-active-border-color: var(--color-brand-secondary);
+    --bs-btn-disabled-color: var(--color-brand);
+    --bs-btn-disabled-border-color: var(--color-brand);
+}
+
+main {
+    padding-block: calc(2 * var(--space));
+}
+
+h1,
+h2 {
+    color: var(--color-brand);
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+main > section {
+    margin-top: calc(2 * var(--space));
+    padding: calc(1.5 * var(--space));
+    background-color: var(--color-surface);
+    border-radius: var(--radius);
+}
+
+legend {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.site-footer p {
+    margin-bottom: calc(var(--space) / 2);
+}
+
+.site-footer {
+    border-top: 3px solid var(--color-accent);
+}
+
+.site-footer a {
+    color: var(--color-accent-soft);
+}
