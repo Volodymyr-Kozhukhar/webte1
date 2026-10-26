@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Malý obchod s cyklistickými doplnkami. Cvičenie 5: DOM, košík a asynchrónny JavaScript.">
+  <title>Velo — Malý obchod | Zadanie 5</title>
+  <link rel="icon" href="assets/bell.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- defer: skript sa spustí až po vytvorení DOM. -->
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="Velo, úvodná stránka"><span class="brand-mark" aria-hidden="true">v.</span>velo<span class="brand-dot">.</span></a>
+      <span class="course-label">WEBOVÉ TECHNOLÓGIE I <span>/</span> CVIČENIE 05</span>
+      <a class="cart-link" href="#cart">Košík <span id="header-count">0</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span aria-hidden="true"></span> MALÝ OBCHOD. VEĽKÉ VÝLETY.</p>
+        <h1 id="hero-title">Každý detail.<br>Pre lepšiu <span>jazdu.</span></h1>
+        <p class="hero-description">Drobnosti, ktoré na ceste oceníte.<br>Vyberte si výbavu na váš ďalší výlet.</p>
+        <a class="hero-link" href="#catalog">Objaviť doplnky <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="art-label">READY FOR THE NEXT RIDE</span>
+        <svg viewBox="0 0 540 320" fill="none">
+          <circle cx="270" cy="160" r="140" fill="#d9e9df"/>
+          <path d="M34 279h472" stroke="#9bb3a1" stroke-width="2" stroke-dasharray="5 7"/>
+          <g stroke="#264939" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="131" cy="218" r="65" fill="#eef3ed"/>
+            <circle cx="406" cy="218" r="65" fill="#eef3ed"/>
+            <path d="m131 218 76-123 61 123H131l180-111 95 111-51-149h-35" stroke="#628c3c"/>
+            <path d="m268 218-72-148m-27 0h53M356 68l21-18h30"/>
+            <circle cx="268" cy="218" r="14" fill="#264939"/>
+            <path d="m268 218 20 24h20"/>
+          </g>
+          <g stroke="#a7bab0" stroke-width="2"><circle cx="131" cy="218" r="49"/><circle cx="406" cy="218" r="49"/></g>
+          <path d="m440 54 8-17 8 17 17 8-17 8-8 17-8-17-17-8z" fill="#648d3d"/>
+        </svg>
+        <span class="art-caption">VYBAVENÍ NA KAŽDÝ KILOMETER <span>↗</span></span>
+      </div>
+    </section>
+
+    <div class="shop-layout">
+      <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">VÝBAVA NA CESTU</p><h2 id="catalog-title">Naše doplnky</h2></div>
+          <span class="small-label">03 vybrané produkty</span>
+        </div>
+        <div class="catalog-toolbar">
+          <p id="status" role="status" aria-live="polite" data-state="loading">Načítavam…</p>
+          <button class="reload-button" id="reload" type="button"><span aria-hidden="true">↻</span> Načítať produkty</button>
+        </div>
+        <ul id="products" class="products" aria-label="Produkty" aria-busy="true"></ul>
+        <p class="catalog-note"><span aria-hidden="true">ⓘ</span> Cvičný obchod · načítanie zo servera je simulované (1,5 s).</p>
+      </section>
+
+      <aside class="cart" id="cart" aria-labelledby="cart-title">
+        <div class="cart-heading"><h2 id="cart-title">Váš košík</h2><span class="cart-count"><span id="cart-count">0</span> ks</span></div>
+        <div id="cart-empty" class="cart-empty">
+          <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M12 22h40l-4 31H16l-4-31Zm10 0v-6a10 10 0 0 1 20 0v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M23 34v8m18-8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <p>Zatiaľ prázdny, ale pripravený.</p><span>Pridajte si niečo na ďalšiu jazdu.</span>
+        </div>
+        <ul id="cart-items" class="cart-items" aria-label="Položky v košíku"></ul>
+        <div class="cart-summary" aria-live="polite" aria-atomic="true">
+          <div class="summary-row"><span>Medzisúčet</span><span id="subtotal">0,00 €</span></div>
+          <div class="summary-row discount-row" id="discount-row" hidden><span>Zľava 10 %</span><span id="discount-amount">−0,00 €</span></div>
+          <div class="summary-total"><span>Spolu</span><strong><span id="cart-total">0,00</span> €</strong></div>
+        </div>
+        <button id="discount" class="discount-button" type="button" aria-pressed="false"><span aria-hidden="true">%</span><span id="discount-label">Zľava 10 %</span></button>
+        <p class="discount-note">Malý bonus na veľké dobrodružstvá.</p>
+      </aside>
+    </div>
+
+    <section class="lesson" aria-labelledby="lesson-title">
+      <div><p class="eyebrow">POD KAPOTOU</p><h2 id="lesson-title">Malý obchod, praktický JavaScript.</h2><p>DOM · udalosti · referencie · Promise · async / await</p></div>
+      <details>
+        <summary>Ako to funguje? <span aria-hidden="true">+</span></summary>
+        <div class="lesson-content">
+          <p><strong>DOM a bezpečný text.</strong> Skript používa <code>defer</code>. Produkty vytvára cez <code>createElement</code> a <code>DocumentFragment</code>; názvy vkladá cez <code>textContent</code>, takže HTML v názve sa nespustí.</p>
+          <p><strong>Udalosti a košík.</strong> Každé tlačidlo má svoj <code>addEventListener</code>. Jeho closure si pamätá konkrétny produkt. <code>push</code> pridáva položku, <code>reduce</code> počíta súčet.</p>
+          <p><strong>Zľava bez mutácie.</strong> <code>map</code> a <code>{ ...item }</code> vytvoria nové objekty s upravenou cenou. Tlačidlo prepína stav; pôvodné ceny ostávajú rovnaké.</p>
+          <p><strong>Asynchrónne načítanie.</strong> <code>Promise</code> simuluje server, <code>await</code> čaká bez blokovania stránky. Server má 30 % pravdepodobnosť chyby: <code>catch</code> zobrazí správu a <code>finally</code> opäť zapne tlačidlo.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+  <footer><a class="footer-brand" href="./">velo.</a><p>Zadanie 5 <span>·</span> WEBTE1 <span>·</span> 2026/2027</p><span>Vyrobené s čistým JavaScriptom.</span></footer>
+</body>
+</html>
