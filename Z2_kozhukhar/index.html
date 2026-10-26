@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="vendor/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="vendor/jquery.min.js" defer></script>
+    <script src="js/parsers.js" defer></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header class="site-header">
@@ -59,13 +61,14 @@
 
             <fieldset class="mt-4" id="restaurant-filters" disabled>
                 <legend>Reštaurácie</legend>
-                <p class="mb-0">Žiadne dostupné reštaurácie.</p>
+                <p class="mb-0">Eat &amp; Meet</p>
             </fieldset>
         </section>
 
         <section>
             <h2>Obedové menu</h2>
-            <p id="menu-message" role="status">Menu momentálne nie je k dispozícii.</p>
+            <p id="loading-message" role="status" hidden>Načítavam menu…</p>
+            <p id="menu-message" role="status">Na zobrazenie menu potrebujem zapnutý JavaScript.</p>
             <div class="row g-3" id="menu-results"></div>
         </section>
     </main>
