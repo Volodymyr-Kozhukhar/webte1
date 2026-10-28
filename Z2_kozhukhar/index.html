@@ -33,18 +33,10 @@
 
         <section class="menu-controls">
             <h2>Výber menu</h2>
-            <div class="row g-3 align-items-end">
-                <div class="col-md-4">
-                    <label class="form-label" for="source-mode">Zdroj menu</label>
-                    <select class="form-select" id="source-mode" disabled>
-                        <option value="local">Lokálne kópie</option>
-                        <option value="live">Stránky reštaurácií</option>
-                    </select>
-                </div>
-                <div class="col-md-8 d-flex flex-wrap gap-2">
-                    <button class="btn btn-primary" id="refresh-menu" type="button" disabled>Aktualizovať menu</button>
-                    <button class="btn btn-outline-secondary" id="clear-data" type="button" disabled>Vymazať uložené dáta</button>
-                </div>
+            <p>Zdroj: lokálne HTML kópie.</p>
+            <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-primary" id="refresh-menu" type="button" disabled>Aktualizovať menu</button>
+                <button class="btn btn-outline-secondary" id="clear-data" type="button" disabled>Vymazať uložené dáta</button>
             </div>
 
             <fieldset class="mt-4" id="day-controls" disabled>
@@ -63,7 +55,20 @@
 
             <fieldset class="mt-4" id="restaurant-filters" disabled>
                 <legend>Reštaurácie</legend>
-                <p class="mb-0">Eat &amp; Meet · Naše Hospoda Karloveská · Družba Cantina</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="restaurant-eatandmeet" checked>
+                        <label class="form-check-label" for="restaurant-eatandmeet">Eat &amp; Meet</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="restaurant-hospoda" checked>
+                        <label class="form-check-label" for="restaurant-hospoda">Naše Hospoda Karloveská</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="restaurant-druzba" checked>
+                        <label class="form-check-label" for="restaurant-druzba">Družba Cantina</label>
+                    </div>
+                </div>
             </fieldset>
         </section>
 
@@ -71,6 +76,7 @@
             <h2>Obedové menu</h2>
             <p id="loading-message" role="status" hidden>Načítavam menu…</p>
             <p id="menu-message" role="status">Na zobrazenie menu potrebujem zapnutý JavaScript.</p>
+            <p class="small mb-0" id="storage-message" role="status"></p>
             <div class="row g-3" id="menu-results"></div>
         </section>
     </main>

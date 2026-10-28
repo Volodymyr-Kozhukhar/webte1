@@ -37,12 +37,14 @@
                 <li><a href="https://www.nasehospoda-karloveska.sk/">Naše Hospoda Karloveská</a> — Segnerova 3, Bratislava.</li>
                 <li><a href="https://www.druzbacatering.sk/obedove-menu/">Družba Cantina</a> — Botanická 25, Bratislava.</li>
             </ul>
-            <p>Zatiaľ zobrazujem lokálnu kópiu stránky uloženú 26. 10. 2026. Ponuka nemusí zodpovedať aktuálnemu týždňu.</p>
+            <p>Zobrazujem lokálne kópie stránok uložené 26. 10. 2026. Ponuka nemusí zodpovedať aktuálnemu týždňu. Tlačidlo Aktualizovať menu znovu spracuje tieto súbory; nové HTML treba uložiť do projektu.</p>
         </section>
         <section>
             <h2>Spracovanie údajov</h2>
             <p>HTML načítavam pomocou jQuery AJAX a spracujem ho cez DOMParser. Vyhľadám jednotlivé dni, jedlá, ceny a alergény a prevediem ich do poľa objektov. Do stránky vkladám iba vybrané textové údaje.</p>
             <p>Menu môžem zobraziť pre vybraný deň alebo celý týždeň. Chyba jedného zdroja nebráni zobrazeniu ostatných. V uloženej kópii Družby je iba pondelkové menu.</p>
+            <p>Tri zdroje načítavam súčasne cez Promise.allSettled(). Spracované údaje ukladám pre každú reštauráciu do localStorage. Pri ďalšom otvorení v rovnaký deň používam uložené dáta. Zobrazený čas je čas posledného spracovania HTML, nie čas prepnutia dňa.</p>
+            <p>Reštaurácie môžem skryť pomocou zaškrtávacích políčok. Aktualizovať menu obíde uložené dáta. Vymazať uložené dáta odstráni iba dáta tohto projektu a vyprázdni zobrazenie; ďalšie načítanie spustím tlačidlom Aktualizovať menu.</p>
         </section>
         <section>
             <h2>Použité knižnice a písmo</h2>

@@ -8,14 +8,71 @@ const restaurants = [
 const menuResults = document.querySelector("#menu-results");
 const menuMessage = document.querySelector("#menu-message");
 const loadingMessage = document.querySelector("#loading-message");
+const storageMessage = document.querySelector("#storage-message");
 const refreshButton = document.querySelector("#refresh-menu");
+const clearButton = document.querySelector("#clear-data");
 const dayControls = document.querySelector("#day-controls");
 const dayButtons = document.querySelectorAll("#day-filters button");
+const restaurantFilters = document.querySelector("#restaurant-filters");
+const restaurantCheckboxes = document.querySelectorAll("#restaurant-filters input");
+const cachePrefix = "webte1-z2-menu-";
 const dayNames = ["", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota", "Nedeľa"];
 const currentDay = new Date().getDay();
 // Date uses 0 for Sunday; our sources use 7.
 let selectedDay = currentDay === 0 ? 7 : currentDay;
 let menuData = [];
+
+function isValidMeal(meal) {
+    // Parsed JSON can still have wrong fields or types.
+    return meal !== null && typeof meal === "object"
+        && Number.isInteger(meal.day) && meal.day >= 1 && meal.day <= 7
+        && (meal.date === null || (typeof meal.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(meal.date) && Number.isFinite(Date.parse(meal.date))))
+        && typeof meal.type === "string" && meal.type.trim() !== ""
+        && typeof meal.name === "string" && meal.name.trim() !== ""
+        && (meal.price === null || (Number.isFinite(meal.price) && meal.price >= 0))
+        && (meal.studentPrice === null || (Number.isFinite(meal.studentPrice) && meal.studentPrice >= 0))
+        && typeof meal.priceNote === "string" && typeof meal.allergens === "string"
+        && (meal.weight === null || typeof meal.weight === "string");
+}
+
+function readCache(restaurant) {
+    try {
+        const text = localStorage.getItem(cachePrefix + restaurant.id);
+        if (text === null) { return null; }
+        const saved = JSON.parse(text);
+
+        if (saved === null || typeof saved !== "object" || !Array.isArray(saved.items)
+            || !saved.items.every(isValidMeal) || typeof saved.updatedAt !== "string"
+            || !Number.isFinite(Date.parse(saved.updatedAt))) {
+            storageMessage.textContent = "Uložené dáta sú poškodené. Načítam lokálne kópie.";
+            return null;
+        }
+
+        // Compare local days, not UTC dates. New snapshots also need parsing.
+        if (saved.snapshotDate !== restaurant.snapshotDate
+            || new Date(saved.updatedAt).toDateString() !== new Date().toDateString()
+            || Date.parse(saved.updatedAt) > Date.now()) {
+            return null;
+        }
+
+        return { items: saved.items, updatedAt: saved.updatedAt };
+    } catch {
+        // Invalid JSON or blocked storage must not stop menu loading.
+        storageMessage.textContent = "Uložené dáta sa nepodarilo prečítať. Načítam lokálne kópie.";
+        return null;
+    }
+}
+
+function saveCache(restaurant, data) {
+    try {
+        // Store data only; parser functions stay in the configuration.
+        const saved = { snapshotDate: restaurant.snapshotDate, items: data.items, updatedAt: data.updatedAt };
+        localStorage.setItem(cachePrefix + restaurant.id, JSON.stringify(saved));
+    } catch {
+        // A full or blocked storage does not hide loaded meals.
+        storageMessage.textContent = "Dáta sa nepodarilo uložiť. Menu zostáva dostupné na tejto stránke.";
+    }
+}
 
 function createMeal(meal) {
     const row = document.createElement("div");
@@ -100,6 +157,10 @@ function renderMenu() {
     });
 
     menuData.forEach(function (entry) {
+        const checkbox = document.querySelector(`#restaurant-${entry.restaurant.id}`);
+        // Filters only change the view, not the saved data.
+        if (!checkbox.checked) { return; }
+
         const article = document.createElement("article");
         article.className = "col-12";
         article.dataset.restaurant = entry.restaurant.id;
@@ -122,7 +183,7 @@ function renderMenu() {
             // Use load time, not the time of each render.
             time.dateTime = entry.updatedAt;
             time.textContent = new Date(entry.updatedAt).toLocaleString("sk-SK");
-            updated.append(`Lokálna kópia zo dňa ${entry.restaurant.snapshotDate}. Načítané: `, time);
+            updated.append(`Lokálna kópia zo dňa ${entry.restaurant.snapshotDate}. Posledné spracovanie: `, time);
             article.append(updated);
 
             if (selectedDay === "week") {
@@ -137,24 +198,41 @@ function renderMenu() {
         menuResults.append(article);
     });
 
-    menuMessage.textContent = selectedDay === "week" ? "Celý týždeň" : dayNames[selectedDay];
+    if (menuData.length === 0) {
+        menuMessage.textContent = "Dáta nie sú načítané. Použite tlačidlo Aktualizovať menu.";
+    } else if (menuResults.childElementCount === 0) {
+        menuMessage.textContent = "Vyberte aspoň jednu reštauráciu.";
+    } else {
+        menuMessage.textContent = selectedDay === "week" ? "Celý týždeň" : dayNames[selectedDay];
+    }
 }
 
-async function loadRestaurant(restaurant) {
-    const html = await $.ajax({ url: restaurant.localUrl, dataType: "text", timeout: 10000 });
+async function loadRestaurant(restaurant, forceRefresh) {
+    if (!forceRefresh) {
+        const cached = readCache(restaurant);
+        if (cached !== null) { return cached; }
+    }
+
+    // Bypass the HTTP cache too when reading the local file.
+    const html = await $.ajax({ url: restaurant.localUrl, dataType: "text", timeout: 10000, cache: false });
     // The parser runs after its HTML arrives.
-    return { items: restaurant.parse(html), updatedAt: new Date().toISOString() };
+    const data = { items: restaurant.parse(html), updatedAt: new Date().toISOString() };
+    saveCache(restaurant, data);
+    return data;
 }
 
-async function loadMenu() {
+async function loadMenu(forceRefresh) {
     refreshButton.disabled = true;
+    clearButton.disabled = true;
     dayControls.disabled = true;
+    restaurantFilters.disabled = true;
     loadingMessage.hidden = false;
     menuMessage.textContent = "";
+    storageMessage.textContent = "";
 
     try {
         // Start all requests before waiting for their results.
-        const requests = restaurants.map(function (restaurant) { return loadRestaurant(restaurant); });
+        const requests = restaurants.map(function (restaurant) { return loadRestaurant(restaurant, forceRefresh); });
         const results = await Promise.allSettled(requests);
 
         menuData = results.map(function (result, index) {
@@ -176,7 +254,23 @@ async function loadMenu() {
         // Always restore controls, including after an error.
         loadingMessage.hidden = true;
         refreshButton.disabled = false;
+        clearButton.disabled = false;
         dayControls.disabled = false;
+        restaurantFilters.disabled = false;
+    }
+}
+
+function clearSavedData() {
+    try {
+        // Remove only our keys; other projects can share this origin.
+        restaurants.forEach(function (restaurant) {
+            localStorage.removeItem(cachePrefix + restaurant.id);
+        });
+        menuData = [];
+        storageMessage.textContent = "Uložené dáta boli vymazané.";
+        renderMenu();
+    } catch {
+        storageMessage.textContent = "Nepodarilo sa vymazať všetky uložené dáta.";
     }
 }
 
@@ -188,5 +282,11 @@ dayButtons.forEach(function (button) {
     });
 });
 
-refreshButton.addEventListener("click", loadMenu);
-loadMenu();
+restaurantCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", renderMenu);
+});
+
+// The wrapper passes a boolean, not the click event.
+refreshButton.addEventListener("click", function () { loadMenu(true); });
+clearButton.addEventListener("click", clearSavedData);
+loadMenu(false);
