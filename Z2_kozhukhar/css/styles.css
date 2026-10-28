@@ -170,3 +170,21 @@ legend {
     font-weight: 700;
     white-space: nowrap;
 }
+
+/* Bootstrap notes
+   container: centered content with side padding; our max-width is 60rem.
+   row: flex row for grid columns. g-3: 1rem gutters in both directions.
+   col-12: full row width. col-md-4/8: 4/12 and 8/12 from 768px.
+   nav: flex navigation list. nav-item: one item. nav-link: link styling.
+   nav-pills: pill-style active link. active: selected styling, no JS action.
+   btn: base button. btn-primary: filled button.
+   btn-outline-primary/secondary: outlined buttons.
+   form-label: label spacing. form-select: select styling.
+   d-flex: display flex. flex-wrap: allow wrapping. gap-2: 0.5rem gap.
+   align-items-end: align grid items at the bottom.
+   mt-4: 1.5rem top margin. mb-1: 0.25rem bottom margin. mb-0: no bottom margin.
+   h5/h6: heading font sizes; they do not change the HTML heading level.
+   small: smaller text. fw-normal: normal font weight. d-block: display block.
+   --bs-*: Bootstrap variables overridden by our theme.
+   site-* and menu-* are our classes, not Bootstrap.
+*/
