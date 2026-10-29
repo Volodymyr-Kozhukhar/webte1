@@ -2,7 +2,7 @@
 const restaurants = [
     { id: "eatandmeet", name: "Eat & Meet", url: "https://eatandmeet.sk/", localUrl: "data/eatandmeet.html", snapshotDate: "2026-10-26", parse: parseEatAndMeet },
     { id: "hospoda", name: "Naše Hospoda Karloveská", url: "https://www.nasehospoda-karloveska.sk/", localUrl: "data/hospoda.html", snapshotDate: "2026-10-26", parse: parseHospoda },
-    { id: "druzba", name: "Družba Cantina", url: "https://www.druzbacatering.sk/obedove-menu/", localUrl: "data/druzba.html", snapshotDate: "2026-10-26", parse: parseDruzba }
+    { id: "druzba", name: "Družba Cantina", url: "https://www.druzbacatering.sk/jedalny-listok/", localUrl: "data/druzba.html", snapshotDate: "2026-10-29", parse: parseDruzba }
 ];
 
 const menuResults = document.querySelector("#menu-results");
@@ -76,34 +76,35 @@ function saveCache(restaurant, data) {
 
 function createMeal(meal) {
     const row = document.createElement("div");
-    row.className = "menu-item";
+    row.className = "menu-item d-flex align-items-start gap-3 p-3 mb-2 rounded-3";
     row.classList.toggle("menu-soup", meal.type === "Polievka");
     const details = document.createElement("div");
+    details.className = "flex-grow-1";
     const type = document.createElement("p");
-    type.className = "small mb-1";
+    type.className = "small text-body-secondary mb-1";
     type.textContent = meal.type;
     const name = document.createElement("p");
-    name.className = "mb-0";
+    name.className = "fw-semibold mb-0";
     // Source text is never inserted as HTML.
     name.textContent = meal.name;
     details.append(type, name);
 
     if (meal.weight !== null) {
         const weight = document.createElement("p");
-        weight.className = "small mb-0";
+        weight.className = "small text-body-secondary mb-0";
         weight.textContent = `Porcia: ${meal.weight}`;
         details.append(weight);
     }
 
     if (meal.allergens !== "") {
         const allergens = document.createElement("p");
-        allergens.className = "small mb-0";
+        allergens.className = "small text-body-secondary mb-0";
         allergens.textContent = `Alergény: ${meal.allergens}`;
         details.append(allergens);
     }
 
     const price = document.createElement("p");
-    price.className = "menu-price";
+    price.className = "menu-price text-success-emphasis text-end fw-bold mb-0";
     // Included or missing prices stay as text, not 0 EUR.
     price.textContent = meal.price === null ? meal.priceNote
         : meal.price.toLocaleString("sk-SK", { style: "currency", currency: "EUR" });
@@ -122,7 +123,7 @@ function createMeal(meal) {
 function createDay(items, day) {
     const section = document.createElement("section");
     const heading = document.createElement("h4");
-    heading.className = "h6 mt-4";
+    heading.className = "h6 fw-bold mt-3 mb-3";
     heading.textContent = dayNames[day];
     const meals = items.filter(function (item) { return item.day === day; });
 
@@ -138,6 +139,7 @@ function createDay(items, day) {
 
     if (meals.length === 0) {
         const empty = document.createElement("p");
+        empty.className = "small text-body-secondary mb-0";
         empty.textContent = "Menu na tento deň nie je k dispozícii.";
         section.append(empty);
     } else {
@@ -162,39 +164,45 @@ function renderMenu() {
         if (!checkbox.checked) { return; }
 
         const article = document.createElement("article");
-        article.className = "col-12";
+        article.className = "col-12 col-lg-4";
         article.dataset.restaurant = entry.restaurant.id;
+        // Grid column outside, Bootstrap card inside.
+        const card = document.createElement("div");
+        card.className = "card bg-white border-0 rounded-4 shadow-sm p-3";
         const heading = document.createElement("h3");
-        heading.className = "h5";
+        heading.className = "h5 fw-bold mb-1";
         const source = document.createElement("a");
+        source.className = "text-decoration-none";
         source.href = entry.restaurant.url;
         source.textContent = entry.restaurant.name;
         heading.append(source);
-        article.append(heading);
+        card.append(heading);
 
         if (entry.error !== null) {
             const error = document.createElement("p");
+            error.className = "small text-danger mb-0";
             error.textContent = entry.error;
-            article.append(error);
+            card.append(error);
         } else {
             const updated = document.createElement("p");
-            updated.className = "small";
+            updated.className = "small text-body-secondary mb-0";
             const time = document.createElement("time");
             // Use load time, not the time of each render.
             time.dateTime = entry.updatedAt;
             time.textContent = new Date(entry.updatedAt).toLocaleString("sk-SK");
-            updated.append(`Lokálna kópia zo dňa ${entry.restaurant.snapshotDate}. Posledné spracovanie: `, time);
-            article.append(updated);
+            updated.append(`Kópia ${entry.restaurant.snapshotDate} · Spracované: `, time);
+            card.append(updated);
 
             if (selectedDay === "week") {
                 for (let day = 1; day <= 7; day++) {
-                    article.append(createDay(entry.items, day));
+                    card.append(createDay(entry.items, day));
                 }
             } else {
-                article.append(createDay(entry.items, selectedDay));
+                card.append(createDay(entry.items, selectedDay));
             }
         }
 
+        article.append(card);
         menuResults.append(article);
     });
 

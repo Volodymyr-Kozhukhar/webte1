@@ -12,78 +12,80 @@
     <script src="js/parsers.js" defer></script>
     <script src="js/script.js" defer></script>
 </head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <p class="site-name">Obedové menu v okolí fakulty</p>
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-white border-bottom">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3 py-3">
+            <div>
+                <p class="fs-5 fw-bold mb-0">Obedové menu</p>
+                <p class="small text-body-secondary mb-0">Okolie FEI STU · Bratislava</p>
+            </div>
+            <nav class="site-nav">
+                <ul class="nav nav-pills gap-2">
+                    <li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages/about.html">O projekte</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    <nav class="site-nav">
-        <div class="container">
-            <ul class="nav nav-pills gap-2">
-                <li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page">Menu</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/about.html">O projekte</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="container">
-        <h1>Čo je dnes na obed?</h1>
-        <p>Porovnajte obedové menu v okolí FEI STU.</p>
+    <main class="container py-4 py-md-5">
+        <h1 class="h2 fw-bold">Čo je dnes na obed?</h1>
+        <p class="text-body-secondary mb-4">Porovnajte obedové menu v okolí FEI STU.</p>
 
-        <section class="menu-controls">
-            <h2>Výber menu</h2>
-            <p>Zdroj: lokálne HTML kópie.</p>
-            <div class="d-flex flex-wrap gap-2">
-                <button class="btn btn-primary" id="refresh-menu" type="button" disabled>Aktualizovať menu</button>
-                <button class="btn btn-outline-secondary" id="clear-data" type="button" disabled>Vymazať uložené dáta</button>
-            </div>
-
-            <fieldset class="mt-4" id="day-controls" disabled>
-                <legend>Deň</legend>
+        <section class="card bg-white border-0 rounded-4 shadow-sm p-3 p-md-4 mb-4">
+            <h2 class="h5 fw-bold mb-3">Výber menu</h2>
+            <fieldset class="mb-4" id="day-controls" disabled>
+                <legend class="h6">Deň</legend>
                 <div class="d-flex flex-wrap gap-2" id="day-filters">
-                    <button class="btn btn-outline-primary active" type="button" data-day="1" aria-pressed="true">Pondelok</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="2" aria-pressed="false">Utorok</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="3" aria-pressed="false">Streda</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="4" aria-pressed="false">Štvrtok</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="5" aria-pressed="false">Piatok</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="6" aria-pressed="false">Sobota</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="7" aria-pressed="false">Nedeľa</button>
-                    <button class="btn btn-outline-primary" type="button" data-day="week" aria-pressed="false">Celý týždeň</button>
+                    <button class="btn btn-sm btn-outline-primary active" type="button" data-day="1" aria-pressed="true">Pondelok</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="2" aria-pressed="false">Utorok</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="3" aria-pressed="false">Streda</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="4" aria-pressed="false">Štvrtok</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="5" aria-pressed="false">Piatok</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="6" aria-pressed="false">Sobota</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="7" aria-pressed="false">Nedeľa</button>
+                    <button class="btn btn-sm btn-outline-primary" type="button" data-day="week" aria-pressed="false">Celý týždeň</button>
                 </div>
             </fieldset>
 
-            <fieldset class="mt-4" id="restaurant-filters" disabled>
-                <legend>Reštaurácie</legend>
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <fieldset id="restaurant-filters" disabled>
+                    <legend class="h6">Reštaurácie</legend>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="restaurant-eatandmeet" checked>
+                            <label class="form-check-label" for="restaurant-eatandmeet">Eat &amp; Meet</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="restaurant-hospoda" checked>
+                            <label class="form-check-label" for="restaurant-hospoda">Naše Hospoda Karloveská</label>
+                        </div>
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="restaurant-druzba" checked>
+                            <label class="form-check-label" for="restaurant-druzba">Družba Cantina</label>
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="d-flex flex-wrap gap-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="restaurant-eatandmeet" checked>
-                        <label class="form-check-label" for="restaurant-eatandmeet">Eat &amp; Meet</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="restaurant-hospoda" checked>
-                        <label class="form-check-label" for="restaurant-hospoda">Naše Hospoda Karloveská</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="restaurant-druzba" checked>
-                        <label class="form-check-label" for="restaurant-druzba">Družba Cantina</label>
-                    </div>
+                    <button class="btn btn-primary" id="refresh-menu" type="button" disabled>Aktualizovať menu</button>
+                    <button class="btn btn-outline-secondary" id="clear-data" type="button" disabled>Vymazať uložené dáta</button>
                 </div>
-            </fieldset>
+            </div>
+            <p class="small text-body-secondary mt-3 mb-0">Zdroj: lokálne HTML kópie.</p>
         </section>
 
         <section>
-            <h2>Obedové menu</h2>
+            <h2 class="h4 fw-bold">Obedové menu</h2>
             <p id="loading-message" role="status" hidden>Načítavam menu…</p>
-            <p id="menu-message" role="status">Na zobrazenie menu potrebujem zapnutý JavaScript.</p>
+            <p class="text-body-secondary" id="menu-message" role="status">Na zobrazenie menu potrebujem zapnutý JavaScript.</p>
             <p class="small mb-0" id="storage-message" role="status"></p>
             <div class="row g-3" id="menu-results"></div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>Volodymyr Kozhukhar · WEBTE1 · Zadanie 2</p>
+    <footer class="bg-white border-top mt-auto">
+        <div class="container d-flex flex-wrap justify-content-between gap-2 py-4 small">
+            <p class="text-body-secondary mb-0">Volodymyr Kozhukhar · WEBTE1 · Zadanie 2</p>
             <a href="pages/about.html">Zdroje a použité knižnice</a>
         </div>
     </footer>

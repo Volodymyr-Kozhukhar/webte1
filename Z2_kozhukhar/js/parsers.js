@@ -185,8 +185,14 @@ function parseDruzba(html) {
                 throw new Error("Štruktúra riadka menu Družba sa zmenila.");
             }
 
-            const description = cells[0].querySelector("em") || cells[0];
-            let name = description.textContent.replace(/\s+/g, " ").trim();
+            const firstText = cells[0].textContent.trim();
+            const priceText = cells[1].textContent.trim();
+            // Skip spacer rows and headers made with td cells.
+            if ((firstText === "" && priceText === "")
+                || (firstText === "Názov" && priceText === "Cena")) { return; }
+
+            // Soup labels and names can be in separate tags.
+            let name = firstText.replace(/\s+/g, " ");
             const type = name.startsWith("Polievka") ? "Polievka" : "Hlavné jedlo";
             const weight = getWeight(name);
             // Only a final numeric bracket is an allergen list.
@@ -198,7 +204,6 @@ function parseDruzba(html) {
             name = name.replace(/^\d+(?:[.,]\d+)?\s*(?:kg|g|ml|l)\s*:?\s*/i, "").trim();
             if (name === "") { throw new Error("V menu Družba chýba názov jedla."); }
 
-            const priceText = cells[1].textContent.trim();
             let price = null;
             let studentPrice = null;
             let priceNote = "";

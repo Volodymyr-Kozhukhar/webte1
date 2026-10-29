@@ -9,45 +9,46 @@
     <link rel="stylesheet" href="../vendor/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <p class="site-name">Obedové menu v okolí fakulty</p>
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-white border-bottom">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3 py-3">
+            <div>
+                <p class="fs-5 fw-bold mb-0">Obedové menu</p>
+                <p class="small text-body-secondary mb-0">Okolie FEI STU · Bratislava</p>
+            </div>
+            <nav class="site-nav">
+                <ul class="nav nav-pills gap-2">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html" aria-current="page">O projekte</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    <nav class="site-nav">
-        <div class="container">
-            <ul class="nav nav-pills gap-2">
-                <li class="nav-item"><a class="nav-link" href="../index.html">Menu</a></li>
-                <li class="nav-item"><a class="nav-link active" href="about.html" aria-current="page">O projekte</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="container">
-        <h1>O projekte</h1>
-        <section>
-            <h2>Účel stránky</h2>
+    <main class="container py-4 py-md-5">
+        <h1 class="h2 fw-bold mb-4">O projekte</h1>
+        <section class="card bg-white border-0 rounded-4 shadow-sm p-3 p-md-4 mb-3">
+            <h2 class="h5 fw-bold">Účel stránky</h2>
             <p>Projekt pripravujem na predmete Webové technológie 1. Cieľom je zobraziť na jednom mieste obedové menu reštaurácií v okolí FEI STU.</p>
         </section>
-        <section>
-            <h2>Zdroje menu</h2>
+        <section class="card bg-white border-0 rounded-4 shadow-sm p-3 p-md-4 mb-3">
+            <h2 class="h5 fw-bold">Zdroje menu</h2>
             <ul>
                 <li><a href="https://eatandmeet.sk/">Eat &amp; Meet</a> — Staré Grunty 36, Bratislava.</li>
                 <li><a href="https://www.nasehospoda-karloveska.sk/">Naše Hospoda Karloveská</a> — Segnerova 3, Bratislava.</li>
-                <li><a href="https://www.druzbacatering.sk/obedove-menu/">Družba Cantina</a> — Botanická 25, Bratislava.</li>
+                <li><a href="https://www.druzbacatering.sk/jedalny-listok/">Družba Cantina</a> — Botanická 25, Bratislava.</li>
             </ul>
-            <p>Zobrazujem lokálne kópie stránok uložené 26. 10. 2026. Ponuka nemusí zodpovedať aktuálnemu týždňu. Tlačidlo Aktualizovať menu znovu spracuje tieto súbory; nové HTML treba uložiť do projektu.</p>
+            <p>Zobrazujem lokálne kópie stránok: Eat &amp; Meet a Naše Hospoda z 26. 10. 2026, Družba z 29. 10. 2026. Ponuka nemusí zodpovedať aktuálnemu týždňu. Tlačidlo Aktualizovať menu znovu spracuje tieto súbory; nové HTML treba uložiť do projektu.</p>
         </section>
-        <section>
-            <h2>Spracovanie údajov</h2>
+        <section class="card bg-white border-0 rounded-4 shadow-sm p-3 p-md-4 mb-3">
+            <h2 class="h5 fw-bold">Spracovanie údajov</h2>
             <p>HTML načítavam pomocou jQuery AJAX a spracujem ho cez DOMParser. Vyhľadám jednotlivé dni, jedlá, ceny a alergény a prevediem ich do poľa objektov. Do stránky vkladám iba vybrané textové údaje.</p>
-            <p>Menu môžem zobraziť pre vybraný deň alebo celý týždeň. Chyba jedného zdroja nebráni zobrazeniu ostatných. V uloženej kópii Družby je iba pondelkové menu.</p>
+            <p>Menu môžem zobraziť pre vybraný deň alebo celý týždeň. Chyba jedného zdroja nebráni zobrazeniu ostatných. Družba zverejňuje menu na pondelok až piatok na stránke Jedálny lístok.</p>
             <p>Tri zdroje načítavam súčasne cez Promise.allSettled(). Spracované údaje ukladám pre každú reštauráciu do localStorage. Pri ďalšom otvorení v rovnaký deň používam uložené dáta. Zobrazený čas je čas posledného spracovania HTML, nie čas prepnutia dňa.</p>
             <p>Reštaurácie môžem skryť pomocou zaškrtávacích políčok. Aktualizovať menu obíde uložené dáta. Vymazať uložené dáta odstráni iba dáta tohto projektu a vyprázdni zobrazenie; ďalšie načítanie spustím tlačidlom Aktualizovať menu.</p>
         </section>
-        <section>
-            <h2>Použité knižnice a písmo</h2>
+        <section class="card bg-white border-0 rounded-4 shadow-sm p-3 p-md-4">
+            <h2 class="h5 fw-bold">Použité knižnice a písmo</h2>
             <ul>
                 <li><a href="https://getbootstrap.com/">Bootstrap 5.3.8</a> — rozloženie stránky, formuláre a tlačidlá. Licencia MIT.</li>
                 <li><a href="https://jquery.com/">jQuery 3.7.1</a> — knižnica pre asynchrónne načítanie dát. Licencia MIT.</li>
@@ -56,9 +57,9 @@
         </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>Volodymyr Kozhukhar · WEBTE1 · Zadanie 2</p>
+    <footer class="bg-white border-top mt-auto">
+        <div class="container d-flex flex-wrap justify-content-between gap-2 py-4 small">
+            <p class="text-body-secondary mb-0">Volodymyr Kozhukhar · WEBTE1 · Zadanie 2</p>
             <a href="about.html">Zdroje a použité knižnice</a>
         </div>
     </footer>
